@@ -30,15 +30,15 @@ body{
   color:#eaffff;
   display:flex;
   justify-content:center;
-  padding:28px 16px;
+  padding:28px 16px; /* Sedikit disesuaikan agar aman di layar kecil */
   min-height: 100vh;
 }
 
-/* WRAP - Melebar di desktop untuk menampung 2 kolom */
+/* WRAP - FIX: Ditambahkan max-width agar tidak melebar di desktop */
 .wrap{
-  width:100%;
-  max-width:1100px;
-  margin:0 auto;
+  width: 100%;
+  max-width: 650px; 
+  margin: 0 auto;
 }
 
 /* HEADER */
@@ -69,7 +69,7 @@ body{
   text-shadow:0 0 12px var(--neon-purple);
 }
 
-/* PROFILE CARD - Otomatis lacak layar untuk mengaktifkan Grid di desktop */
+/* PROFILE CARD */
 .card{
   background:linear-gradient(180deg,
     rgba(255,255,255,0.06),
@@ -81,22 +81,13 @@ body{
   box-shadow:
     0 0 18px rgba(0,246,255,0.28),
     0 0 28px rgba(255,0,157,0.25);
-  display: flex;
-  flex-direction: column;
 }
 
-/* Bagian Kiri (Profil) & Kanan (Skills) saat di desktop */
-.profile-left {
-  width: 100%;
-}
-.skills-right {
-  width: 100%;
-}
-
-/* PROFILE IMAGE */
+/* PROFILE IMAGE - FIX: Ditambahkan max-height agar proporsional */
 .profile-img{
   width:100%;
-  height:320px;
+  height:auto;
+  max-height:400px;
   object-fit:cover;
   border-radius:12px;
   border:1px solid rgba(255,255,255,0.18);
@@ -211,7 +202,7 @@ body{
 /* SOCIAL */
 .mySocial{
   display:none;
-  margin-top:18px;
+  margin-top:auto;
   padding:14px;
   border-radius:12px;
   background:linear-gradient(90deg,
@@ -243,28 +234,7 @@ body{
   transform:scale(1.08);
 }
 
-/* ======================================================== */
-/* MEDIA QUERY: OTOMATIS BERUBAH SAAT DI DESKTOP / LAYAR LEBAR */
-/* ======================================================== */
-@media (min-width: 768px) {
-  .card {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr; /* Membagi jadi 2 kolom (kiri & kanan) */
-    gap: 24px;
-    align-items: start;
-  }
-  
-  .profile-img {
-    height: auto;
-    max-height: 420px; /* Mengunci tinggi gambar agar tidak melar di monitor besar */
-  }
-
-  #skillPage {
-    margin-top: 0; /* Merapikan jarak atas skill di desktop */
-  }
-}
-
-/* RESPONSIVE UNTUK ELEMEN DI DALAM SKILL (BAWAAN) */
+/* RESPONSIVE */
 @media (max-width:720px){
   .profile-img{height:220px}
   .skill{flex-direction:column;align-items:flex-start}
@@ -289,69 +259,65 @@ body{
   </div>
 
   <div class="card">
-    <div class="profile-left">
-      <img class="profile-img" src="apasi.jpg" alt="profile image" />
-      <div class="profile-desc">
-        I’m a Roblox game developer with a strong passion for creating immersive and interactive experiences.
-        I specialize in turning ideas into fully playable worlds.
-      </div>
-
-      <div class="controls">
-        <button class="btn" id="aboutBtn" aria-expanded="false">About Me</button>
-      </div>
+    <img class="profile-img" src="apasi.jpg" alt="profile image" />
+    <div class="profile-desc">
+      I’m a Roblox game developer with a strong passion for creating immersive and interactive experiences.
+      I specialize in turning ideas into fully playable worlds.
     </div>
 
-    <div class="skills-right">
-      <div id="skillPage" aria-hidden="true">
-        <h2 style="text-align:center;margin-top:0;margin-bottom:14px;color:var(--neon-cyan);">My Desc</h2>
+    <div class="controls">
+      <button class="btn" id="aboutBtn" aria-expanded="false">About Me</button>
+    </div>
 
-        <div class="skill">
-          <div class="left"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop" alt="Scripter image"></div>
-          <div class="meta">
-            <h3><strong>Scripting</strong></h3>
-            <div style="font-size:13px;opacity:0.85">Build systems, tools, and gameplay mechanics.</div>
-            <button class="readMore" data-target="s1">Show More</button>
-            <div id="s1" class="long-desc">As a scripter I architect responsive systems that scale well—optimizing remote events, modular modules, and writing clear, documented code suitable for teams and solo production. I prioritize performance and readability so gameplay feels smooth and reliable.</div>
-          </div>
+    <div id="skillPage" aria-hidden="true">
+      <h2 style="text-align:center;margin-bottom:14px;color:var(--neon-cyan);">My Desc</h2>
+
+      <div class="skill">
+        <div class="left"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop" alt="Scripter image"></div>
+        <div class="meta">
+          <h3><strong>Scripting</strong></h3>
+          <div style="font-size:13px;opacity:0.85">Build systems, tools, and gameplay mechanics.</div>
+          <button class="readMore" data-target="s1">Show More</button>
+          <div id="s1" class="long-desc">As a scripter I architect responsive systems that scale well—optimizing remote events, modular modules, and writing clear, documented code suitable for teams and solo production. I prioritize performance and readability so gameplay feels smooth and reliable.</div>
         </div>
-
-        <div class="skill">
-          <div class="left"><img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/5X/0/d/3/7/0d37a2cd5fb28681ea6395a38ef9e63df7e2056f.png" alt="GUI image"></div>
-          <div class="meta">
-            <h3><strong>GUI Designer</strong></h3>
-            <div style="font-size:13px;opacity:0.85">Interfaces that are clear and delightful.</div>
-            <button class="readMore" data-target="s2">Show More</button>
-            <div id="s2" class="long-desc">I prototype UI with accessibility, clarity, and game feel in mind—using grid systems, consistent spacing, and animation to guide the player. I craft elements that communicate game state quickly and look great on many screen sizes.</div>
-          </div>
-        </div>
-
-        <div class="skill">
-          <div class="left"><img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/5X/8/d/c/c/8dcce167e6fd6a62133402bfc1068e90720f4f5a_2_690x388.jpeg" alt="Map Builder image"></div>
-          <div class="meta">
-            <h3><strong>Map Building</strong></h3>
-            <div style="font-size:13px;opacity:0.85">Create immersive playable spaces.</div>
-            <button class="readMore" data-target="s3">Show More</button>
-            <div id="s3" class="long-desc">I focus on layout readability, player flow, and atmosphere—balancing landmarks, cover, and pacing to keep players engaged. I iterate on playtests to ensure maps are fun and clear.</div>
-          </div>
-        </div>
-
-        <div class="skill">
-          <div class="left"><img src="https://i.ytimg.com/vi/p6az5gB7YUY/maxresdefault.jpg" alt="Detailing image"></div>
-          <div class="meta">
-            <h3><strong>Map Detailing</strong></h3>
-            <div style="font-size:13px;opacity:0.85">Polish that elevates immersion.</div>
-            <button class="readMore" data-target="s4">Show More</button>
-            <div id="s4" class="long-desc">Detailing includes lighting touches, ambient props, decals, and subtle storytelling items that make a map feel lived-in and believable. I use details to direct players and reinforce theme.</div>
-          </div>
-        </div>
-
-        <div class="mySocial" id="newSocial">
-          <a href="https://discord.gg/Q8Qya3nmC3" target="_blank">Discord</a>
-          <a href="https://instagram.com/lasw1t" target="_blank">Instagram</a>
-          <a href="https://www.tiktok.com/@agitto0" target="_blank">TikTok</a>
-        </div>
-
       </div>
+
+      <div class="skill">
+        <div class="left"><img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/5X/0/d/3/7/0d37a2cd5fb28681ea6395a38ef9e63df7e2056f.png" alt="GUI image"></div>
+        <div class="meta">
+          <h3><strong>GUI Designer</strong></h3>
+          <div style="font-size:13px;opacity:0.85">Interfaces that are clear and delightful.</div>
+          <button class="readMore" data-target="s2">Show More</button>
+          <div id="s2" class="long-desc">I prototype UI with accessibility, clarity, and game feel in mind—using grid systems, consistent spacing, and animation to guide the player. I craft elements that communicate game state quickly and look great on many screen sizes.</div>
+        </div>
+      </div>
+
+      <div class="skill">
+        <div class="left"><img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/optimized/5X/8/d/c/c/8dcce167e6fd6a62133402bfc1068e90720f4f5a_2_690x388.jpeg" alt="Map Builder image"></div>
+        <div class="meta">
+          <h3><strong>Map Building</strong></h3>
+          <div style="font-size:13px;opacity:0.85">Create immersive playable spaces.</div>
+          <button class="readMore" data-target="s3">Show More</button>
+          <div id="s3" class="long-desc">I focus on layout readability, player flow, and atmosphere—balancing landmarks, cover, and pacing to keep players engaged. I iterate on playtests to ensure maps are fun and clear.</div>
+        </div>
+      </div>
+
+      <div class="skill">
+        <div class="left"><img src="https://i.ytimg.com/vi/p6az5gB7YUY/maxresdefault.jpg" alt="Detailing image"></div>
+        <div class="meta">
+          <h3><strong>Map Detailing</strong></h3>
+          <div style="font-size:13px;opacity:0.85">Polish that elevates immersion.</div>
+          <button class="readMore" data-target="s4">Show More</button>
+          <div id="s4" class="long-desc">Detailing includes lighting touches, ambient props, decals, and subtle storytelling items that make a map feel lived-in and believable. I use details to direct players and reinforce theme.</div>
+        </div>
+      </div>
+
+      <div class="mySocial" id="newSocial">
+        <a href="https://discord.gg/Q8Qya3nmC3" target="_blank">Discord</a>
+        <a href="https://instagram.com/lasw1t" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@agitto0" target="_blank">TikTok</a>
+      </div>
+
     </div>
   </div>
 
