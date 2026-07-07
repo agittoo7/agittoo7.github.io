@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-<title>AGittoo's Profie Page'</title>
+<title>AGittoo's Profile Page</title>
 
 <style>
 :root{
@@ -30,14 +30,15 @@ body{
   color:#eaffff;
   display:flex;
   justify-content:center;
-  padding:28px;
+  padding:28px 16px; /* Sedikit disesuaikan agar aman di layar kecil */
+  min-height: 100vh;
 }
 
-/* WRAP */
+/* WRAP - FIX: Ditambahkan max-width agar tidak melebar di desktop */
 .wrap{
-  width:98vw;
-  max-width:none;
-  margin:0 auto;
+  width: 100%;
+  max-width: 650px; 
+  margin: 0 auto;
 }
 
 /* HEADER */
@@ -81,8 +82,13 @@ body{
     0 0 18px rgba(0,246,255,0.28),
     0 0 28px rgba(255,0,157,0.25);
 }
+
+/* PROFILE IMAGE - FIX: Ditambahkan max-height agar proporsional */
 .profile-img{
-  width:100%;height:320px;object-fit:cover;
+  width:100%;
+  height:auto;
+  max-height:400px;
+  object-fit:cover;
   border-radius:12px;
   border:1px solid rgba(255,255,255,0.18);
   box-shadow:0 0 24px rgba(0,246,255,0.25);
@@ -171,7 +177,7 @@ body{
 .skill .meta{flex:1;min-width:180px}
 .skill h3{margin:0 0 6px 0;font-size:16px;text-shadow:0 0 6px var(--neon-purple)}
 
-/* LONG DESCRIPTION - FIX: hidden by default */
+/* LONG DESCRIPTION */
 .long-desc{
   display:none;
   margin-top:10px;
@@ -256,7 +262,7 @@ body{
     <img class="profile-img" src="apasi.jpg" alt="profile image" />
     <div class="profile-desc">
       I’m a Roblox game developer with a strong passion for creating immersive and interactive experiences.
-      I specialize and turning ideas into fully playable worlds.
+      I specialize in turning ideas into fully playable worlds.
     </div>
 
     <div class="controls">
@@ -322,7 +328,6 @@ const aboutBtn = document.getElementById("aboutBtn");
 const skillPage = document.getElementById("skillPage");
 const newSocial = document.getElementById("newSocial");
 
-// Ensure all long-desc are hidden on load (defensive)
 document.querySelectorAll('.long-desc').forEach(el => {
   el.style.display = 'none';
 });
@@ -360,11 +365,9 @@ document.querySelectorAll('.readMore').forEach(btn => {
     const id = e.currentTarget.getAttribute('data-target');
     const el = document.getElementById(id);
     if(!el) return;
-    // toggle with explicit checks
     if (el.style.display === 'none' || el.style.display === '') {
       el.style.display = 'block';
       e.currentTarget.textContent = 'Close';
-      // optionally scroll into view on small screens
       if(window.innerWidth < 720){
         el.scrollIntoView({behavior:'smooth',block:'center'});
       }
@@ -384,11 +387,6 @@ const observer = new IntersectionObserver(entries=>{
   })
 },{threshold:.2});
 skillItems.forEach(el=>observer.observe(el));
-
-    
-    
-    
-    
 </script>
 
 </body>
